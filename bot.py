@@ -21,7 +21,7 @@ MINT_COST_WEI = int(MINT_COST * 10**18)
 MY_WALLET = ''
 NFT_CA = ''
 BUYS_ENABLED = True
-TG_TOKEN_ID = ''
+TG_TOKEN_ID = '' # telegram token id. if blank, no tg alerts will be sent
 
 def notify_arena(username, num_mints, nft_id, link):
     message = 'Thanks @%s for minting a Comfy Kroox! You got # %s<br/>%s' % (username, nft_id, link)
@@ -40,20 +40,22 @@ def notify_arena(username, num_mints, nft_id, link):
     r = requests.post('https://api.starsarena.com/threads', headers=headers, data=json.dumps(payload))
 
 def notify_dev(message):
-    TOKEN=TG_TOKEN_ID
-    CHAT_ID=''
-    if message != '':
-        text = '%s' % (message)
-        bot = telegram.Bot(token=TOKEN)
-        bot.sendMessage(chat_id=CHAT_ID, text=text)
+    if TG_TOKEN_ID != '':
+        TOKEN=TG_TOKEN_ID
+        CHAT_ID=''
+        if message != '':
+            text = '%s' % (message)
+            bot = telegram.Bot(token=TOKEN)
+            bot.sendMessage(chat_id=CHAT_ID, text=text)
 
 def notify_tg_group(message):
-    TOKEN=TG_TOKEN_ID
-    CHAT_ID=''
-    if message != '':
-        text = '%s' % (message)
-        bot = telegram.Bot(token=TOKEN)
-        bot.sendMessage(chat_id=CHAT_ID, text=text)
+    if TG_TOKEN_ID != '':
+        TOKEN=TG_TOKEN_ID
+        CHAT_ID=''
+        if message != '':
+            text = '%s' % (message)
+            bot = telegram.Bot(token=TOKEN)
+            bot.sendMessage(chat_id=CHAT_ID, text=text)
 
 def read_users_json():
     with open('../nochillexchange/users.json', 'r') as openfile:
